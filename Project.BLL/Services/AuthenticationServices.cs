@@ -38,25 +38,25 @@ namespace Project.BLL.Services
 
             var (jwtToken, accessToken) = await GenerateJWtToken(user);
             // Get Refresh Token
-            var refreshtoken = GetRefreshToken(user.UserName);
-            if (refreshtoken == null) throw new InvalidOperationException("Failed to generate refresh token.");
+            //var refreshtoken = GetRefreshToken(user.UserName);
+            //if (refreshtoken == null) throw new InvalidOperationException("Failed to generate refresh token.");
 
-            var userRefreshtoken = new UserRefreshToken()
-            {
-                AddTime = DateTime.Now,
-                ExpiredAt = DateTime.Now.AddDays(_jwtSettings.AccessTokenExpireDate),
-                Token = accessToken,
-                IsRevoked = false,
-                UserId = user.Id,
-                JwtId = jwtToken.Id,
-                RefreshToken = refreshtoken.TokenString,
-            };
+            //var userRefreshtoken = new UserRefreshToken()
+            //{
+            //    AddTime = DateTime.Now,
+            //    ExpiredAt = DateTime.Now.AddDays(_jwtSettings.AccessTokenExpireDate),
+            //    Token = accessToken,
+            //    IsRevoked = false,
+            //    UserId = user.Id,
+            //    JwtId = jwtToken.Id,
+            //    RefreshToken = refreshtoken.TokenString,
+            //};
 
-            await _refreshTokenRepository.AddAsync(userRefreshtoken);
+            //await _refreshTokenRepository.AddAsync(userRefreshtoken);
 
             var response = new JWTAuthResult
             {
-                RefreshToken = refreshtoken,
+                //RefreshToken = refreshtoken,
                 AccessToken = accessToken
             };
 
@@ -97,26 +97,26 @@ namespace Project.BLL.Services
         }
 
 
-        private RefreshToken GetRefreshToken(string username)
-        {
+        //private RefreshToken GetRefreshToken(string username)
+        //{
 
-            var refreshtoken = new RefreshToken()
-            {
-                UserName = username,
-                ExpireAt = DateTime.Now.AddYears(_jwtSettings.RefreshTokenExpireDate),
-                TokenString = GenerateRefreshToken()
-            };
+        //    var refreshtoken = new RefreshToken()
+        //    {
+        //        UserName = username,
+        //        ExpireAt = DateTime.Now.AddYears(_jwtSettings.RefreshTokenExpireDate),
+        //        TokenString = GenerateRefreshToken()
+        //    };
 
-            return refreshtoken;
-        }
-        private string GenerateRefreshToken()
-        {
+        //    return refreshtoken;
+        //}
+        //private string GenerateRefreshToken()
+        //{
 
-            var randomNumber = new Byte[32];
-            var randomnumberGenerate = RandomNumberGenerator.Create();
-            randomnumberGenerate.GetBytes(randomNumber);
-            return Convert.ToBase64String(randomNumber);
-        }
+        //    var randomNumber = new Byte[32];
+        //    var randomnumberGenerate = RandomNumberGenerator.Create();
+        //    randomnumberGenerate.GetBytes(randomNumber);
+        //    return Convert.ToBase64String(randomNumber);
+        //}
 
         public List<Claim> GetClaims(ApplicationUser user, List<string> roles)
         {

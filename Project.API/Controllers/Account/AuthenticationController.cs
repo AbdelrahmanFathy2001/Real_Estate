@@ -59,8 +59,15 @@ namespace Project.API.Controllers.Account
 
             var accessToken = await _authServices.GetJWTToken(user);
 
-            return Ok(accessToken);
+            var authResult = new JWTAuthResult
+            {
+                AccessToken = accessToken.AccessToken,
+                Roles = userRoles.ToList() 
+            };
+
+            return Ok(authResult);
         }
+
 
 
 

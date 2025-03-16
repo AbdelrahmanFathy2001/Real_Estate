@@ -3,7 +3,10 @@
     public class JWTAuthResult
     {
         public string AccessToken { get; set; }
-        public RefreshToken RefreshToken { get; set; }
+
+        //public RefreshToken RefreshToken { get; set; }
+        public List<string> Roles { get; set; } 
+
 
     }
 
