@@ -31,6 +31,8 @@ namespace Project.BLL.Specifications
 
         public string? UnitType { get; set; }
 
+        public string? DealType { get; set; }
+
 
         //private string? search;
 

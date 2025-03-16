@@ -11,7 +11,7 @@ namespace Project.BLL.Dtos.Office
     {
         public string Id { get; set; }
         [Display(Name = "Office Name")]
-        public string UserName { get; set; }
+        public string? OfficeName { get; set; }
         [EmailAddress]
         public string Email { get; set; }
         public string Phone { get; set; }

@@ -14,6 +14,8 @@ namespace Project.DAL.Entities.Identity
         public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string? OfficeName { get; set; }
+
         public string? Code { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

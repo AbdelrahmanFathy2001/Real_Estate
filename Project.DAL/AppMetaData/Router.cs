@@ -93,7 +93,7 @@
             public const string AddRole = Prefix + "AddRole";
             public const string ManageUserRole = Prefix + "ManageUserRole";
             public const string GetAllRoles = Prefix + "GetAllRoles";
-            public const string GetUsersWithoutRoles = Prefix + "GetUsersWithoutRoles";
+            public const string GetUsersByRole = Prefix + "GetUsersByRole";
             public const string UpdateRole = Prefix + "UpdateRole";
             public const string UpdateUserRole = Prefix + "UpdateUserRole";
             public const string DeleteRole = Prefix + "DeleteRole";

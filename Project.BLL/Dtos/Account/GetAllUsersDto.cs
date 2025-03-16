@@ -11,8 +11,8 @@ namespace Project.BLL.Dtos.Account
         [Display(Name = "Last Name")]
 
         public string LastName { get; set; }
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        [Display(Name = "Office Name")]
+        public string? OfficeName { get; set; }
 
         public string Email { get; set; }
         public string Phone { get; set; }

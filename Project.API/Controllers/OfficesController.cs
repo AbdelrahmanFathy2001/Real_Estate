@@ -32,7 +32,7 @@ namespace Project.API.Controllers
 
                 if (!string.IsNullOrWhiteSpace(specParams.Search))
                 {
-                    users = users.Where(user => user.UserName.Contains(specParams.Search, StringComparison.OrdinalIgnoreCase)).ToList();
+                    users = users.Where(user => user.OfficeName.Contains(specParams.Search, StringComparison.OrdinalIgnoreCase)).ToList();
                 }
 
                 // Apply pagination
@@ -65,7 +65,7 @@ namespace Project.API.Controllers
                 .Select(u => new
                 {
                     u.Id,
-                    u.UserName,
+                    u.OfficeName,
                     u.PhoneNumber,
                     u.Email,
                     RealEstateAds = u.ClientInfos
@@ -87,7 +87,7 @@ namespace Project.API.Controllers
             var result = new OfficeToReturnDto
             {
                 Id = userWithRealEstateAds.Id,
-                UserName = userWithRealEstateAds.UserName,
+                OfficeName = userWithRealEstateAds.OfficeName,
                 Phone = userWithRealEstateAds.PhoneNumber,
                 Email = userWithRealEstateAds.Email,
                 RealEstateAds = userWithRealEstateAds.RealEstateAds

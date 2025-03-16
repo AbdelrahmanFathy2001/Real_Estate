@@ -100,16 +100,18 @@ namespace Project.API.Controllers.Account
             };
         }
 
-        [HttpGet(Router.AuthorizationRouting.GetUsersWithoutRoles)]
-        public async Task<IReadOnlyList<ManageUsers>> GetUsersWithoutRolesAsync()
+        [HttpGet(Router.AuthorizationRouting.GetUsersByRole)]
+        public async Task<ActionResult<IReadOnlyList<ManageUsers>>> GetUsersByRole([FromQuery] string? roleName)
         {
-            var userRolesList = await _authorizationService.GetAllUsersWithRolesAsync();
-
-            var usersWithoutRoles = userRolesList
-                .Where(user => user.Roles == null || user.Roles.Count == 0)
-                .ToList();
-
-            return usersWithoutRoles;
+            try
+            {
+                var users = await _authorizationService.GetUsersByRoleAsync(roleName);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
 

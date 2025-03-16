@@ -12,7 +12,7 @@ namespace Project.BLL.Services
         public Task<ManageUserRoles> GetManageUserRoleWithRoles(ApplicationUser user);
         public Task<string> UpdateUserRoleWithRoles(UpdateUserRole userRole);
 
-        public Task<IReadOnlyList<ManageUsers>> GetAllUsersWithRolesAsync();
+        public Task<IReadOnlyList<ManageUsers>> GetUsersByRoleAsync(string? roleName);
 
 
     }

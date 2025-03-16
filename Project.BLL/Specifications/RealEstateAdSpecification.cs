@@ -32,6 +32,7 @@ namespace Project.BLL.Specifications
           (string.IsNullOrEmpty(realEstateAdSpecParams.Region) || p.Region.ToLower().Contains(realEstateAdSpecParams.Region)) &&
           (string.IsNullOrEmpty(realEstateAdSpecParams.Neighborhood) || p.Neighborhood.ToLower().Contains(realEstateAdSpecParams.Neighborhood))&&
           (string.IsNullOrEmpty(realEstateAdSpecParams.UnitType) || p.UnitType == EnumTranslations.GetEnumFromTranslation<UnitType>(realEstateAdSpecParams.UnitType))&&
+          (string.IsNullOrEmpty(realEstateAdSpecParams.DealType) || p.DealType == EnumTranslations.GetEnumFromTranslation<DealType>(realEstateAdSpecParams.DealType)) &&
           (p.Ispublic == true)
 
           )

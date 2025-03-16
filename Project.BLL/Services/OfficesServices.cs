@@ -55,7 +55,7 @@ namespace Project.BLL.Services
                 ID = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.UserName,
+                OfficeName = user.OfficeName,
                 Email = user.Email,
                 Phone = user.PhoneNumber,
                 Country = user.Country,

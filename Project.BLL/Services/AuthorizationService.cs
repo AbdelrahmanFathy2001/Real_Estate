@@ -58,9 +58,10 @@ namespace Project.BLL.Services
 
         }
 
-        public async Task<IReadOnlyList<ManageUsers>> GetAllUsersWithRolesAsync()
+        public async Task<IReadOnlyList<ManageUsers>> GetUsersByRoleAsync(string? roleName)
         {
-            var users = await _userManager.Users.ToListAsync();
+            // جلب جميع المستخدمين النشطين
+            var users = await _userManager.Users.Where(u => u.EmailConfirmed == true).ToListAsync();
 
             // جلب جميع الأدوار من قاعدة البيانات
             var allRoles = await _roleManager.Roles.ToListAsync();
@@ -72,34 +73,40 @@ namespace Project.BLL.Services
                 // جلب الأدوار الخاصة بالمستخدم
                 var userRoles = await _userManager.GetRolesAsync(user);
 
-                var response = new ManageUsers
+                // تصفية المستخدمين بناءً على الدور المطلوب
+                if ((!string.IsNullOrEmpty(roleName) && userRoles.Contains(roleName)) ||  // إذا كان له الدور المطلوب
+                    (string.IsNullOrEmpty(roleName) && userRoles.Count == 0))  // أو إذا لم يكن لديه أي دور
                 {
-                    UserId = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    Phone = user.PhoneNumber,
-                    Country = user.Country,
-                    City = user.City,
-                    Street = user.Street,
-                    Roles = userRoles.Select(roleName =>
+                    var response = new ManageUsers
                     {
-                        var role = allRoles.FirstOrDefault(r => r.Name == roleName);
-                        return new Roles
+                        UserId = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        UserName = user.UserName,
+                        Email = user.Email,
+                        Phone = user.PhoneNumber,
+                        Country = user.Country,
+                        City = user.City,
+                        Street = user.Street,
+                        Roles = userRoles.Select(role =>
                         {
-                            RoleId = role?.Id, // إرجاع RoleId إذا وجد الدور
-                            RoleName = roleName,
-                            HasRole = true
-                        };
-                    }).ToList()
-                };
+                            var roleData = allRoles.FirstOrDefault(r => r.Name == role);
+                            return new Roles
+                            {
+                                RoleId = roleData?.Id, // إرجاع RoleId إذا وجد الدور
+                                RoleName = role,
+                                HasRole = true
+                            };
+                        }).ToList()
+                    };
 
-                userRolesList.Add(response);
+                    userRolesList.Add(response);
+                }
             }
 
             return userRolesList;
         }
+
 
 
 
